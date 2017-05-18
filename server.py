@@ -41,7 +41,8 @@ def sms_reply():
     """
     resp = MessagingResponse()
 
-    buffy_text = markov.get_quote("buffy_speechify.txt")
+    # buffy_text = markov.get_quote("buffy_speechify.txt")
+    buffy_text = "that'll put marzipan in your pie plate, bingo!"
 
     resp.message(buffy_text)
 
