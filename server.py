@@ -13,10 +13,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
 app.jinja_env.endefined = StrictUndefined
 
-# AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
-# ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
-# CALLER_ID = os.environ.get("TWILIO_CALLER_ID")
-# TWILIO_APP_SID = os.environ.get("TWILIO_TWIML_APP_SID")
+AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
+ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
+CALLER_ID = os.environ.get("TWILIO_CALLER_ID")
+TWILIO_APP_SID = os.environ.get("TWILIO_TWIML_APP_SID")
 
 # api = twitter.Api(
 #     consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
@@ -55,9 +55,10 @@ def sms_reply():
 def awkward_text():
     """sends text to requested number."""
     # TODO need to create a page with form that accepts users phone input
-    phone_raw = request.form.get("recipient")
+    phone_raw = request.form.get("mobile")
+    response = phone_raw
 
-    response = sms_functions.eval_phone(phone_raw)
+    # response = sms_functions.eval_phone(phone_raw)
 
     return redirect("/send_sms", response=response)
 
