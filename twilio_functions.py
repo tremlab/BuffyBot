@@ -1,4 +1,12 @@
 import markov
+from twilio import twiml
+from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse
+
+AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
+ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
+CALLER_ID = os.environ.get("TWILIO_CALLER_ID")
+TWILIO_APP_SID = os.environ.get("TWILIO_TWIML_APP_SID")
 
 def eval_phone(phone_raw):
 
