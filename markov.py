@@ -1,7 +1,14 @@
 from random import choice
 import sys
-import twitter
 import os
+from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
+from jinja2 import StrictUndefined
+import twitter
+from twilio import twiml
+from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse
+import sms_functions
+
 
 api = twitter.Api(
     consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
@@ -23,7 +30,7 @@ def open_and_read_file(file_path):
     return text_input
 
 
-def make_chains(text_string, key_word_count):
+def make_chains(text_string, key_word_count=2):
     """Takes input text as string; returns _dictionary_ of markov chains.
 
     A chain will be a key that consists of a tuple of (word1, word2)
@@ -143,7 +150,11 @@ def tweet_markov(text, chains):
         return
 
 
-if __name__ == '__main__':
+
+
+################################################################################
+if __name__ == "__main__":
+
 
     file_name = sys.argv[1]
 
