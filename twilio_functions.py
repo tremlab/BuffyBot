@@ -28,21 +28,23 @@ def eval_phone(phone_raw):
     else:
         response = "not a valid phone number.  try again!"
 
-def send_sms(response):
+    return response
+
+
+def send_sms(mobile):
     """sends text to requested number."""
 
-    if response[0] != "+":
+    if mobile[0] != "+":
         confirm_string = "not a valid phone number. try again!"
-        return render_template("confirm_sms.html", response=confirm_string)
     else:
         sms_string = markov.get_quote("buffy_speechify.txt")
         client = Client(ACCOUNT_SID, AUTH_TOKEN)
         message = client.messages.create(
-            to=recepient_phone,
+            to=mobile,
             from_=CALLER_ID,
             body=sms_string,
             # media_url="https://climacons.herokuapp.com/clear.png",
         )
         confirm_string = """confirmed!  sent '%s' to %s """ % (sms_string, response)
 
-        return confirm_string
+    return confirm_string
