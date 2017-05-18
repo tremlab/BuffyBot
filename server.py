@@ -5,9 +5,9 @@ import os
 from twilio import twiml
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
-import sms_functions
 from jinja2 import StrictUndefined
 import markov
+import twilio_functions
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
@@ -49,34 +49,16 @@ def sms_reply():
 
 
 @app.route("/message", methods=['POST'])
-def awkward_text():
-    """sends text to requested number."""
+def ask_for_msg():
     # TODO need to create a page with form that accepts users phone input
     phone_raw = request.form.get("mobile")
     response = phone_raw
 
     # response = sms_functions.eval_phone(phone_raw)
+    sms_string = markov.get_quote("buffy_speechify.txt")
+    confirm_string = twilio_functions.send_sms
 
-    return redirect("/send_sms", response=response)
-
-
-@app.route("/send_sms")
-def send_SMS(response):
-
-    if response[0] != "+":
-        confirm_string = "not a valid phone number. try again!"
-        return render_template("confirm_sms.html", response=confirm_string)
-    else:
-        sms_string = markov.get_quote("buffy_speechify.txt")
-        client = Client(ACCOUNT_SID, AUTH_TOKEN)
-        message = client.messages.create(
-            to=recepient_phone,
-            from_=CALLER_ID,
-            body=sms_string,
-            # media_url="https://climacons.herokuapp.com/clear.png",
-        )
-        confirm_string = """confirmed!  sent '%s' to %s """ % (sms_string, response)
-        return render_template("confirm_sms.html", response=confirm_string)
+    return render_template("confirm_sms.html", confirm_string=confirm_string)
 
     
 
