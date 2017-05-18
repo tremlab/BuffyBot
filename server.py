@@ -41,12 +41,9 @@ def sms_reply():
     """
     resp = MessagingResponse()
 
-    buffy_text = get_quote("buffy_speechify.txt")
+    buffy_text = markov.get_quote("buffy_speechify.txt")
 
-
-    sms_string = ????
-
-    resp.message(sms_string)
+    resp.message(buffy_text)
 
     return str(resp)
 
@@ -70,13 +67,13 @@ def send_SMS(response):
         confirm_string = "not a valid phone number. try again!"
         return render_template("confirm_sms.html", response=confirm_string)
     else:
-        sms_string = sms_functions.get_message()
+        sms_string = markov.get_quote("buffy_speechify.txt")
         client = Client(ACCOUNT_SID, AUTH_TOKEN)
         message = client.messages.create(
             to=recepient_phone,
             from_=CALLER_ID,
             body=sms_string,
-            media_url="https://climacons.herokuapp.com/clear.png",
+            # media_url="https://climacons.herokuapp.com/clear.png",
         )
         confirm_string = """confirmed!  sent '%s' to %s """ % (sms_string, response)
         return render_template("confirm_sms.html", response=confirm_string)
