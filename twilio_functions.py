@@ -2,6 +2,8 @@ import markov
 from twilio import twiml
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
+import os
+
 
 AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
 ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
