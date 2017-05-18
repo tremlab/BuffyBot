@@ -45,6 +45,6 @@ def send_sms(mobile):
             body=sms_string,
             # media_url="https://climacons.herokuapp.com/clear.png",
         )
-        confirm_string = """confirmed!  sent '%s' to %s """ % (sms_string, response)
+        confirm_string = """confirmed!  sent '%s' to %s """ % (sms_string, mobile)
 
     return confirm_string
