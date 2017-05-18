@@ -11,10 +11,11 @@
 <span id="wordSalad"></span>
 
 <p>Just enter a mobile number below to receive some word salad straight from the Buffy Bot herself!</p>
-<p>This bot is as twii as can be. She will generate a random Buffy-eqsuen sentance based on Markov Chain logic, and then will tweet the message to Twitter, and text it to your mobile using Twilio.</p>
+<p>For samples, checkout: <a href="https://twitter.com/BuffyMarkovBot">@BuffyMarkovBot</a></p>
+<p>This bot is as twii as can be. She will generate a random Buffy-eqsue sentance based on Markov Chain logic, and then will tweet the message to Twitter, and text it to your mobile using Twilio.</p>
     <div id="recipientMobile">
-            <form action="/sms" method="POST">
-                Email: <input type="text" name="mobile" id="mobile">
+            <form action="/message" method="POST">
+                Mobile: <input type="text" name="mobile" id="mobile">
                     <span id="mobileValid"></span><br>
                 <input type="submit" id="registerButton" disabled>
             </form>

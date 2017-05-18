@@ -7,23 +7,24 @@ from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 import sms_functions
 from jinja2 import StrictUndefined
+import markov
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
 app.jinja_env.endefined = StrictUndefined
 
-AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
-ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
-CALLER_ID = os.environ.get("TWILIO_CALLER_ID")
-TWILIO_APP_SID = os.environ.get("TWILIO_TWIML_APP_SID")
+# AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
+# ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
+# CALLER_ID = os.environ.get("TWILIO_CALLER_ID")
+# TWILIO_APP_SID = os.environ.get("TWILIO_TWIML_APP_SID")
 
-api = twitter.Api(
-    consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
-    consumer_secret=os.environ['TWITTER_CONSUMER_SECRET'],
-    access_token_key=os.environ['TWITTER_ACCESS_TOKEN_KEY'],
-    access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
+# api = twitter.Api(
+#     consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
+#     consumer_secret=os.environ['TWITTER_CONSUMER_SECRET'],
+#     access_token_key=os.environ['TWITTER_ACCESS_TOKEN_KEY'],
+#     access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
 
-print api.VerifyCredentials()
+# print api.VerifyCredentials()
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -40,7 +41,10 @@ def sms_reply():
     """
     resp = MessagingResponse()
 
-    sms_string = sms_functions.get_message()
+    buffy_text = get_quote("buffy_speechify.txt")
+
+
+    sms_string = ????
 
     resp.message(sms_string)
 

@@ -3,20 +3,20 @@ import sys
 import os
 from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
 from jinja2 import StrictUndefined
-import twitter
+# import twitter
 from twilio import twiml
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 import sms_functions
 
 
-api = twitter.Api(
-    consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
-    consumer_secret=os.environ['TWITTER_CONSUMER_SECRET'],
-    access_token_key=os.environ['TWITTER_ACCESS_TOKEN_KEY'],
-    access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
+# api = twitter.Api(
+#     consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
+#     consumer_secret=os.environ['TWITTER_CONSUMER_SECRET'],
+#     access_token_key=os.environ['TWITTER_ACCESS_TOKEN_KEY'],
+#     access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
 
-print api.VerifyCredentials()
+# print api.VerifyCredentials()
 
 
 def open_and_read_file(file_path):
@@ -123,31 +123,52 @@ def is_ending_punctuation(word):
         else:
             return False
 
+def get_quote(file_name):
+    """takes in filename, calls for file to be opened,
+    parsed into chains, and then returns a resulting quote.
+    """
+    text_from_file = open_and_read_file(file_name)
+    chains = make_chains(text_from_file, 2)
+    markov_text = make_text(chains)
+    # quote = eval_text(markov_text, chains)
+    return markov_text
 
-def tweet_markov(text, chains):
+
+def eval_text(text, chains):
     """evaluates text for suitability to Twitter, then tweets it.
     """
 
     while len(text) >= 140:
         text = make_text(chains)
 
-    print text
+    return text
 
-    print """
-    Would you like to:
-    1. tweet this message
-    2. see a different message to tweet
-    3. quit
-    """
-    user_selection = raw_input("> ")
-    if user_selection == "1":
-        status = api.PostUpdate(text)
-        print status.text
-    elif user_selection == "2":
-        new_text = make_text(chains)
-        tweet_markov(new_text, chains)
-    else:
-        return
+
+
+# def tweet_markov(text, chains):
+#     """evaluates text for suitability to Twitter, then tweets it.
+#     """
+
+#     while len(text) >= 140:
+#         text = make_text(chains)
+
+#     print text
+
+#     print """
+#     Would you like to:
+#     1. tweet this message
+#     2. see a different message to tweet
+#     3. quit
+#     """
+#     user_selection = raw_input("> ")
+#     if user_selection == "1":
+#         status = api.PostUpdate(text)
+#         print status.text
+#     elif user_selection == "2":
+#         new_text = make_text(chains)
+#         tweet_markov(new_text, chains)
+#     else:
+#         return
 
 
 
@@ -156,7 +177,7 @@ def tweet_markov(text, chains):
 if __name__ == "__main__":
 
 
-    file_name = sys.argv[1]
+    file_name = "buffy_speechify.txt"
 
     # Open the file and turn it into one long string
     text_from_file = open_and_read_file(file_name)
@@ -166,4 +187,4 @@ if __name__ == "__main__":
 
     markov_text = make_text(chains)
 
-    tweet_markov(markov_text, chains)
+    print markov_text
