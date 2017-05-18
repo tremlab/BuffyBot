@@ -53,11 +53,11 @@ def sms_reply():
 def ask_for_msg():
     # TODO need to create a page with form that accepts users phone input
     phone_raw = request.form.get("mobile")
-    response = phone_raw
+    
+    # mobile = sms_functions.eval_phone(phone_raw)
+    mobile = phone_raw
 
-    # response = sms_functions.eval_phone(phone_raw)
-    sms_string = markov.get_quote("buffy_speechify.txt")
-    confirm_string = twilio_functions.send_sms
+    confirm_string = twilio_functions.send_sms(phone_raw)
 
     return render_template("confirm_sms.html", confirm_string=confirm_string)
 
