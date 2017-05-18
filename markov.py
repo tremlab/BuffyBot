@@ -1,13 +1,6 @@
 from random import choice
 import sys
 import os
-from flask import Flask, jsonify, render_template, redirect, request, Response, flash, session
-from jinja2 import StrictUndefined
-# import twitter
-from twilio import twiml
-from twilio.rest import Client
-from twilio.twiml.messaging_response import MessagingResponse
-import sms_functions
 
 
 # api = twitter.Api(
