@@ -111,42 +111,20 @@ def get_quote(file_name):
     """
     text_from_file = open_and_read_file(file_name)
     chains = make_chains(text_from_file, 2)
-
-    # makse sure string is suitable for text & twitter.
-    is_short_enough = False
-    while not is_short_enough:
-        markov_text = make_text(chains)
-        if len(markov_text) < 141:
-            is_short_enough = False
-            
+    markov_text = make_text(chains)
     return markov_text
 
 
-
-# def tweet_markov(text, chains):
+# def eval_text(text, chains):
 #     """evaluates text for suitability to Twitter, then tweets it.
 #     """
 
 #     while len(text) >= 140:
 #         text = make_text(chains)
 
-#     print text
+#     return text
 
-#     print """
-#     Would you like to:
-#     1. tweet this message
-#     2. see a different message to tweet
-#     3. quit
-#     """
-#     user_selection = raw_input("> ")
-#     if user_selection == "1":
-#         status = api.PostUpdate(text)
-#         print status.text
-#     elif user_selection == "2":
-#         new_text = make_text(chains)
-#         tweet_markov(new_text, chains)
-#     else:
-#         return
+
 
 
 
