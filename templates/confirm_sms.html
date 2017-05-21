@@ -7,8 +7,9 @@
 <h2>'What's with the Dadaism, Red?"</h2>
 
 <img src="../static/images/buffybot.jpg">
-
-<span id="wordSalad">Marzipan! Message sent: {{ confirm_string }}</span>
+<br>
+<br>
+<span id="wordSalad"><h2>{{ confirm_string }}</h2></span>
 
 <p>Just enter a mobile number below to receive some word salad straight from the Buffy Bot herself!</p>
 <p>For samples, checkout: <a href="https://twitter.com/BuffyMarkovBot">@BuffyMarkovBot</a></p>
@@ -17,9 +18,9 @@
             <form action="/message" method="POST">
                 Mobile: <input type="text" name="mobile" id="mobile">
                     <span id="mobileValid"></span><br>
-                <input type="submit" id="registerButton" disabled>
+                <input type="submit" id="registerButton">
             </form>
-            <br><br><br><button type="submit" id="cancelMobile">Cancel</button>
+            <br><br><br>
     </div>
 
 {% endblock %}
