@@ -1,15 +1,4 @@
 from random import choice
-import sys
-import os
-
-
-# api = twitter.Api(
-#     consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
-#     consumer_secret=os.environ['TWITTER_CONSUMER_SECRET'],
-#     access_token_key=os.environ['TWITTER_ACCESS_TOKEN_KEY'],
-#     access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
-
-# print api.VerifyCredentials()
 
 
 def open_and_read_file(file_path):
@@ -122,19 +111,15 @@ def get_quote(file_name):
     """
     text_from_file = open_and_read_file(file_name)
     chains = make_chains(text_from_file, 2)
-    markov_text = make_text(chains)
-    # quote = eval_text(markov_text, chains)
+
+    # makse sure string is suitable for text & twitter.
+    is_short_enough = False
+    while not is_short_enough:
+        markov_text = make_text(chains)
+        if len(markov_text) < 141:
+            is_short_enough = False
+            
     return markov_text
-
-
-def eval_text(text, chains):
-    """evaluates text for suitability to Twitter, then tweets it.
-    """
-
-    while len(text) >= 140:
-        text = make_text(chains)
-
-    return text
 
 
 
