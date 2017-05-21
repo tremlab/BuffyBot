@@ -35,7 +35,7 @@ def send_sms(mobile):
     """sends text to requested number."""
 
     if mobile[0] != "+":
-        confirm_string = "not a valid phone number. try again!"
+        confirm_string = None
     else:
         sms_string = markov.get_quote("buffy_speechify.txt")
         client = Client(ACCOUNT_SID, AUTH_TOKEN)
@@ -45,6 +45,6 @@ def send_sms(mobile):
             body=sms_string,
             # media_url="https://climacons.herokuapp.com/clear.png",
         )
-        confirm_string = """confirmed!  sent '%s' to %s """ % (sms_string, mobile)
+        confirm_string = sms_string
 
     return confirm_string
