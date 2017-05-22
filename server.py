@@ -49,7 +49,7 @@ def ask_for_msg():
 
     buffy_txt = twilio_functions.send_sms(mobile)
 
-    twitter_functions.tweet_text(buffy_txt)
+    # twitter_functions.tweet_text(buffy_txt)
 
     confirm_string = """Marzipan! '%s' was texted to %s
     """ % (buffy_txt, mobile)
