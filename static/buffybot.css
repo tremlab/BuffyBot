@@ -1,7 +1,11 @@
 p {
-    color: orange;
+    color: gray;
 }
 
 body {
     font-family: sans-serif;
+}
+
+h1 {
+    color: orange;
 }
