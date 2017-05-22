@@ -47,7 +47,6 @@ def make_chains(text_string, key_word_count=2):
         else:
             chains[key_values] = [words[index + key_word_count]]
 
-    # your code goes here
     return chains
 
 
@@ -87,9 +86,18 @@ def make_text(chains):
             key_as_list.append(new_word)
             key = tuple(key_as_list)
 
-    # for bigram, value in chains.iteritems():
-    #     text += value
-    return " ".join(text)
+    buffy_quote = " ".join(text)
+
+    return buffy_quote
+
+# def eval_text(text, chains):
+#     """evaluates text for suitability to Twitter, then tweets it.
+#     """
+
+#     while len(text) >= 140:
+#         text = make_text(chains)
+
+#     return text
 
 
 def is_capitalized(key):
@@ -105,6 +113,7 @@ def is_ending_punctuation(word):
         else:
             return False
 
+
 def get_quote(file_name):
     """takes in filename, calls for file to be opened,
     parsed into chains, and then returns a resulting quote.
@@ -112,17 +121,12 @@ def get_quote(file_name):
     text_from_file = open_and_read_file(file_name)
     chains = make_chains(text_from_file, 2)
     markov_text = make_text(chains)
+
+    while len(markov_text) > 139:
+        markov_text = make_text(chains)
+
     return markov_text
 
-
-# def eval_text(text, chains):
-#     """evaluates text for suitability to Twitter, then tweets it.
-#     """
-
-#     while len(text) >= 140:
-#         text = make_text(chains)
-
-#     return text
 
 
 ################################################################################

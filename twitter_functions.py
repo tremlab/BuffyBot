@@ -3,7 +3,7 @@ import twitter
 
 
 def tweet_text(text):
-    """tweets seleceted text to twitter.
+    """tweets selected text to twitter.
     """
     api = twitter.Api(
         consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
