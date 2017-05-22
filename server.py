@@ -4,11 +4,14 @@ import os
 from twilio import twiml
 from twilio.twiml.messaging_response import MessagingResponse
 from jinja2 import StrictUndefined
+import bugsnag
+from bugsnag.flask import handle_exceptions
 import markov
 import twilio_functions
 import twitter_functions
 
 app = Flask(__name__)
+handle_exceptions(app) # bugsnag
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
 app.jinja_env.endefined = StrictUndefined
 
@@ -17,6 +20,10 @@ ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
 CALLER_ID = os.environ.get("TWILIO_CALLER_ID")
 TWILIO_APP_SID = os.environ.get("TWILIO_TWIML_APP_SID")
 
+bugsnag.configure(
+    api_key=os.environ.get("BUGSNAG_KEY"),
+    project_root="/",
+)
 
 @app.route("/", methods=['GET', 'POST'])
 def homepage():
@@ -57,6 +64,9 @@ def ask_for_msg():
 
 
 if __name__ == "__main__":
+    bugsnag.notify(Exception("Test Error"))
     DEBUG = "NO_DEBUG" not in os.environ
     PORT = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=PORT)
+
+
