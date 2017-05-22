@@ -45,11 +45,10 @@ def ask_for_msg():
     phone_raw = request.form.get("mobile")
 
     mobile = twilio_functions.eval_phone(phone_raw)
-    mobile = phone_raw
 
     buffy_txt = twilio_functions.send_sms(mobile)
 
-    # twitter_functions.tweet_text(buffy_txt)
+    twitter_functions.tweet_text(buffy_txt)
 
     confirm_string = """Marzipan! '%s' was texted to %s
     """ % (buffy_txt, mobile)

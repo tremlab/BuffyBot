@@ -133,14 +133,6 @@ def get_quote(file_name):
 if __name__ == "__main__":
 
 
-    file_name = "buffy_speechify.txt"
+    file_name = "buffy_speechify.txt"    
 
-    # Open the file and turn it into one long string
-    text_from_file = open_and_read_file(file_name)
-
-    # Markov chain dictionary from text file
-    chains = make_chains(text_from_file, 2)
-
-    markov_text = make_text(chains)
-
-    print markov_text
+    print get_quote(file_name)
