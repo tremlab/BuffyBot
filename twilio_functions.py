@@ -1,7 +1,6 @@
 import markov
 from twilio import twiml
 from twilio.rest import Client
-from twilio.twiml.messaging_response import MessagingResponse
 import os
 
 
@@ -10,21 +9,18 @@ ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
 CALLER_ID = os.environ.get("TWILIO_CALLER_ID")
 TWILIO_APP_SID = os.environ.get("TWILIO_TWIML_APP_SID")
 
+
 def eval_phone(phone_raw):
+    """make sure mobile # is correctly formatted for twilio.
+        From form - user input will be a string of only digits.
+    """
 
-    phone_digits = []
-    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+    if phone_raw[0] != 1:
+        phone_raw += "1"
 
-    for char in phone_raw:
-        if char in numbers:
-            phone_digits.append(char)
-    if phone_digits[0] != 1:
-        phone_digits.insert(0, "1")
-
-    if len(phone_digits) == 11:
-        phone_digits.insert(0, "+")
-        recepient_phone = phone_digits.join()
-        response = recepient_phone
+    if len(phone_raw) == 11:
+        phone_raw += "+"
+        response = phone_raw
     else:
         response = "not a valid phone number.  try again!"
 

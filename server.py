@@ -44,7 +44,7 @@ def sms_reply():
 def ask_for_msg():
     phone_raw = request.form.get("mobile")
 
-    # mobile = sms_functions.eval_phone(phone_raw)
+    mobile = twilio_functions.eval_phone(phone_raw)
     mobile = phone_raw
 
     buffy_txt = twilio_functions.send_sms(mobile)
