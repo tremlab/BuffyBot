@@ -16,10 +16,10 @@ def eval_phone(phone_raw):
     """
 
     if phone_raw[0] != 1:
-        phone_raw += "1"
+        phone_raw = "1" + phone_raw
 
     if len(phone_raw) == 11:
-        phone_raw += "+"
+        phone_raw = "+" + phone_raw
         response = phone_raw
     else:
         response = "not a valid phone number.  try again!"
