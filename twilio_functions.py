@@ -14,7 +14,6 @@ def eval_phone(phone_raw):
     """make sure mobile # is correctly formatted for twilio.
         From form - user input will be a string of only digits.
     """
-
     if phone_raw[0] != 1:
         phone_raw = "1" + phone_raw
 
