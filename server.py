@@ -11,7 +11,7 @@ import twilio_functions
 import twitter_functions
 
 app = Flask(__name__)
-handle_exceptions(app) # bugsnag
+handle_exceptions(app) # bugsnag config
 app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "s0Then!stO0dth34ean9a11iw4n7edto9ow4s8ur$7!ntOfL*me5")
 app.jinja_env.endefined = StrictUndefined
 
